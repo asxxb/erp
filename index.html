@@ -555,6 +555,192 @@
             font-weight: 700;
             color: var(--blue-500);
         }
+
+        /* ── DB SCHEMA MODAL ── */
+        .schema-btn {
+            margin-top: 20px;
+            padding: 10px 18px;
+            background: var(--teal-600);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .schema-btn:hover {
+            background: var(--teal-700);
+            transform: translateY(-2px);
+        }
+
+        .schema-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.7);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 40px 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .schema-modal-content {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .schema-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border: none;
+            background: var(--gray-100);
+            width: 38px;
+            height: 38px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--gray-600);
+            transition: all 0.2s ease;
+        }
+
+        .schema-close-btn:hover {
+            background: var(--gray-200);
+        }
+
+        .schema-header {
+            margin-bottom: 28px;
+        }
+
+        .schema-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--teal-50);
+            color: var(--teal-600);
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .schema-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+
+        .schema-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--gray-200);
+            overflow-x: auto;
+        }
+
+        .schema-tab {
+            padding: 12px 16px;
+            background: none;
+            border: none;
+            color: var(--gray-600);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .schema-tab:hover {
+            color: var(--gray-900);
+        }
+
+        .schema-tab.active {
+            color: var(--teal-600);
+            border-bottom-color: var(--teal-600);
+        }
+
+        .schema-content {
+            display: none;
+        }
+
+        .schema-content.active {
+            display: block;
+        }
+
+        .schema-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-bottom: 24px;
+        }
+
+        .schema-table thead {
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .schema-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .schema-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .schema-table tbody tr:hover {
+            background: var(--gray-50);
+        }
+
+        .schema-column-name {
+            font-family: 'DM Mono', monospace;
+            color: var(--blue-600);
+            font-weight: 600;
+        }
+
+        .schema-type {
+            font-family: 'DM Mono', monospace;
+            color: var(--teal-600);
+            font-weight: 500;
+        }
+
+        .schema-constraint {
+            display: inline-block;
+            background: var(--blue-50);
+            color: var(--blue-600);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .schema-note {
+            font-size: 13px;
+            color: var(--gray-600);
+            padding: 12px;
+            background: var(--gray-50);
+            border-left: 3px solid var(--teal-500);
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
     </style>
 </head>
 <body>
@@ -1392,7 +1578,7 @@
 
         <!-- Phase 1 Summary -->
         <div class="phase1-summary">
-            <h3 class="phase1-summary-title">Phase 1 Objective</h3>
+            <h3 class="phase1-summary-title">Phase Objective</h3>
             <p class="phase1-summary-text">
                 To establish a reliable offline-first ERP foundation capable of handling retail sales, inventory operations, purchase workflows, secure cash management, and centralized business monitoring.
             </p>
@@ -1404,6 +1590,358 @@
                 <span class="highlight-badge">Cloud Synchronization</span>
                 <span class="highlight-badge">Role-Based Security</span>
             </div>
+            <button class="schema-btn" onclick="openSchemaModal()">
+                <i class="ph ph-database"></i>
+                View Database Schema
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- DATABASE SCHEMA MODAL -->
+<div id="schemaModal" class="schema-modal">
+    <div class="schema-modal-content">
+        <button class="schema-close-btn" onclick="closeSchemaModal()">
+            ✕
+        </button>
+        
+        <div class="schema-header">
+            <div class="schema-badge">
+                <i class="ph ph-database"></i>
+                DATABASE SCHEMA
+            </div>
+            <h2 class="schema-title">Core ERP Database Structure</h2>
+        </div>
+
+        <!-- Schema Tabs -->
+        <div class="schema-tabs">
+            <button class="schema-tab active" onclick="switchSchemaTab('party')">
+                <i class="ph ph-users"></i> Party (Customer/Supplier)
+            </button>
+            <button class="schema-tab" onclick="switchSchemaTab('sales')">
+                <i class="ph ph-shopping-cart"></i> Sales Documents
+            </button>
+            <button class="schema-tab" onclick="switchSchemaTab('inventory')">
+                <i class="ph ph-package"></i> Inventory
+            </button>
+            <button class="schema-tab" onclick="switchSchemaTab('purchase')">
+                <i class="ph ph-truck"></i> Purchase
+            </button>
+            <button class="schema-tab" onclick="switchSchemaTab('masters')">
+                <i class="ph ph-database"></i> Masters
+            </button>
+        </div>
+
+        <!-- Party Schema -->
+        <div id="party-content" class="schema-content active">
+            <div class="schema-note">
+                <strong>party</strong> — Unified Customer + Supplier entity. A party can be both simultaneously.
+            </div>
+            <table class="schema-table">
+                <thead>
+                    <tr>
+                        <th>Column</th>
+                        <th>Type</th>
+                        <th>Constraints & Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="schema-column-name">id</span></td>
+                        <td><span class="schema-type">BIGSERIAL</span></td>
+                        <td><span class="schema-constraint">PK</span> Primary key</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">uuid</span></td>
+                        <td><span class="schema-type">UUID</span></td>
+                        <td><span class="schema-constraint">UNIQUE</span> External-facing ID (prevents enumeration)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">party_code</span></td>
+                        <td><span class="schema-type">VARCHAR(50)</span></td>
+                        <td><span class="schema-constraint">UNIQUE</span> Auto-generated: PTY-0001</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">name</span></td>
+                        <td><span class="schema-type">VARCHAR(500)</span></td>
+                        <td><span class="schema-constraint">NOT NULL</span> English name</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">name_ar</span></td>
+                        <td><span class="schema-type">VARCHAR(500)</span></td>
+                        <td>Arabic name for Saudi compliance</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">vat_number</span></td>
+                        <td><span class="schema-type">VARCHAR(20)</span></td>
+                        <td><span class="schema-constraint">UNIQUE</span> 15-digit Saudi VAT</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">is_customer</span></td>
+                        <td><span class="schema-type">BOOLEAN</span></td>
+                        <td><span class="schema-constraint">NOT NULL</span> Can sell to</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">is_supplier</span></td>
+                        <td><span class="schema-type">BOOLEAN</span></td>
+                        <td><span class="schema-constraint">NOT NULL</span> Can buy from</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">status</span></td>
+                        <td><span class="schema-type">VARCHAR(20)</span></td>
+                        <td>active | inactive | blocked</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">created_by</span></td>
+                        <td><span class="schema-type">BIGINT</span></td>
+                        <td><span class="schema-constraint">FK</span> → app_user(id)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">created_at</span></td>
+                        <td><span class="schema-type">TIMESTAMPTZ</span></td>
+                        <td>Audit trail</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="schema-note">
+                <strong>customer_data</strong> — Extension of party with customer-specific fields (credit_limit, credit_days, outstanding, etc.)
+            </div>
+        </div>
+
+        <!-- Sales Schema -->
+        <div id="sales-content" class="schema-content">
+            <div class="schema-note">
+                <strong>sales_invoice</strong> — Core billing document. Status: draft → posted → printed
+            </div>
+            <table class="schema-table">
+                <thead>
+                    <tr>
+                        <th>Column</th>
+                        <th>Type</th>
+                        <th>Constraints & Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="schema-column-name">id</span></td>
+                        <td><span class="schema-type">BIGSERIAL</span></td>
+                        <td><span class="schema-constraint">PK</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">invoice_number</span></td>
+                        <td><span class="schema-type">VARCHAR(30)</span></td>
+                        <td><span class="schema-constraint">UNIQUE</span> INV-2026-0001</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">branch_id</span></td>
+                        <td><span class="schema-type">BIGINT</span></td>
+                        <td><span class="schema-constraint">FK</span> → branch(id)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">customer_id</span></td>
+                        <td><span class="schema-type">BIGINT</span></td>
+                        <td><span class="schema-constraint">FK</span> → party(id)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">invoice_date</span></td>
+                        <td><span class="schema-type">DATE</span></td>
+                        <td>Document date</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">sub_total</span></td>
+                        <td><span class="schema-type">NUMERIC(18,4)</span></td>
+                        <td><span class="schema-constraint">STORED</span> Before tax/discount</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">vat_amount</span></td>
+                        <td><span class="schema-type">NUMERIC(18,4)</span></td>
+                        <td>15% Saudi standard VAT</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">grand_total</span></td>
+                        <td><span class="schema-type">NUMERIC(18,4)</span></td>
+                        <td><span class="schema-constraint">STORED</span> sub_total + vat</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">status</span></td>
+                        <td><span class="schema-type">VARCHAR(20)</span></td>
+                        <td>draft | posted | printed</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="schema-note">
+                <strong>sales_invoice_line</strong> — Line items with qty, rate, discounts, tax per line
+            </div>
+        </div>
+
+        <!-- Inventory Schema -->
+        <div id="inventory-content" class="schema-content">
+            <div class="schema-note">
+                <strong>item</strong> — Core inventory master with tracking (batch/serial), VAT, pricing
+            </div>
+            <table class="schema-table">
+                <thead>
+                    <tr>
+                        <th>Column</th>
+                        <th>Type</th>
+                        <th>Constraints & Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="schema-column-name">id</span></td>
+                        <td><span class="schema-type">BIGSERIAL</span></td>
+                        <td><span class="schema-constraint">PK</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">item_code</span></td>
+                        <td><span class="schema-type">VARCHAR(50)</span></td>
+                        <td><span class="schema-constraint">UNIQUE</span> SKU</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">barcode</span></td>
+                        <td><span class="schema-type">VARCHAR(100)</span></td>
+                        <td><span class="schema-constraint">UNIQUE</span> EAN/UPC</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">category_id</span></td>
+                        <td><span class="schema-type">BIGINT</span></td>
+                        <td><span class="schema-constraint">FK</span> → item_category(id)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">cost_price</span></td>
+                        <td><span class="schema-type">NUMERIC(18,4)</span></td>
+                        <td>LPR — Last Purchase Rate</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">selling_price</span></td>
+                        <td><span class="schema-type">NUMERIC(18,4)</span></td>
+                        <td>LSR — Last Selling Rate</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">tracking_type</span></td>
+                        <td><span class="schema-type">VARCHAR(20)</span></td>
+                        <td>none | batch | serial</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">is_service</span></td>
+                        <td><span class="schema-type">BOOLEAN</span></td>
+                        <td>Service items have no stock movement</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="schema-note">
+                <strong>inventory_transaction</strong> — Insert-only ledger for stock tracking. Current stock = SUM(qty) per item+warehouse
+            </div>
+        </div>
+
+        <!-- Purchase Schema -->
+        <div id="purchase-content" class="schema-content">
+            <div class="schema-note">
+                <strong>purchase_invoice</strong> — Supplier billing with GRN linkage
+            </div>
+            <table class="schema-table">
+                <thead>
+                    <tr>
+                        <th>Column</th>
+                        <th>Type</th>
+                        <th>Constraints & Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="schema-column-name">id</span></td>
+                        <td><span class="schema-type">BIGSERIAL</span></td>
+                        <td><span class="schema-constraint">PK</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">po_number</span></td>
+                        <td><span class="schema-type">VARCHAR(30)</span></td>
+                        <td>PO-2026-0001</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">supplier_id</span></td>
+                        <td><span class="schema-type">BIGINT</span></td>
+                        <td><span class="schema-constraint">FK</span> → party(id)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">grn_id</span></td>
+                        <td><span class="schema-type">BIGINT</span></td>
+                        <td><span class="schema-constraint">FK</span> → grn(id) Goods Received Note</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">po_date</span></td>
+                        <td><span class="schema-type">DATE</span></td>
+                        <td>Document date</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">sub_total</span></td>
+                        <td><span class="schema-type">NUMERIC(18,4)</span></td>
+                        <td>Before VAT</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">vat_amount</span></td>
+                        <td><span class="schema-type">NUMERIC(18,4)</span></td>
+                        <td>5% or 15% VAT per line</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Masters Schema -->
+        <div id="masters-content" class="schema-content">
+            <div class="schema-note">
+                <strong>Masters</strong> — Reference data for system configuration
+            </div>
+            <table class="schema-table">
+                <thead>
+                    <tr>
+                        <th>Table</th>
+                        <th>Purpose</th>
+                        <th>Key Columns</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="schema-column-name">area</span></td>
+                        <td>Geographic zones</td>
+                        <td>code, name, region, status</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">route</span></td>
+                        <td>Sales routes per area</td>
+                        <td>area_id, code, name, status</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">brand</span></td>
+                        <td>Product brands</td>
+                        <td>code, name, status</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">unit_of_measure</span></td>
+                        <td>UOM (kg, box, pcs, etc.)</td>
+                        <td>symbol, conversion_factor</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">credit_term</span></td>
+                        <td>Payment terms (Net30, Net60)</td>
+                        <td>days, credit_limit</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">payment_method</span></td>
+                        <td>Payment types</td>
+                        <td>method_type (cash, bank, card)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="schema-column-name">tax</span></td>
+                        <td>VAT rates</td>
+                        <td>rate (15%, 5%, 0%)</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -1551,6 +2089,54 @@ Keep answers clear, concise, 1-2 paragraphs max. Emphasise reliability and busin
             chatHistory.pop();
         }
     }
+
+    // ── Database Schema Modal ──
+    function openSchemaModal() {
+        const modal = document.getElementById('schemaModal');
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeSchemaModal() {
+        const modal = document.getElementById('schemaModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    function switchSchemaTab(tabName) {
+        // Hide all contents
+        const contents = document.querySelectorAll('.schema-content');
+        contents.forEach(content => {
+            content.classList.remove('active');
+        });
+
+        // Remove active class from all tabs
+        const tabs = document.querySelectorAll('.schema-tab');
+        tabs.forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        // Show selected content
+        const selectedContent = document.getElementById(tabName + '-content');
+        if (selectedContent) {
+            selectedContent.classList.add('active');
+        }
+
+        // Add active class to clicked tab
+        event.target.classList.add('active');
+    }
+
+    // Close modal on background click
+    document.addEventListener('click', function(event) {
+        const modal = document.getElementById('schemaModal');
+        if (modal && event.target === modal) {
+            closeSchemaModal();
+        }
+    });
 
     // Workflow Modal
 function toggleWorkflow() {
