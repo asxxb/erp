@@ -391,6 +391,170 @@
             margin-bottom: 20px;
             text-align: center;
         }
+
+        /* ── PHASE 1 SECTION ── */
+        .phase1-section {
+            background: var(--gray-50);
+            padding: 72px 24px;
+            margin-top: 0;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .phase1-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .phase1-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .phase1-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--blue-50);
+            color: var(--blue-600);
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .phase1-title {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--gray-900);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .phase1-subtitle {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.7;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .operations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            margin-bottom: 56px;
+        }
+
+        .operation-card {
+            background: #fff;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: 32px 24px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .operation-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px);
+            border-color: var(--blue-200);
+        }
+
+        .operation-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--blue-50);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--blue-600);
+            margin-bottom: 20px;
+        }
+
+        .operation-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .operation-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .operation-features li {
+            font-size: 13px;
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .operation-features li::before {
+            content: "•";
+            color: var(--blue-400);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .phase1-summary {
+            background: linear-gradient(135deg, var(--blue-50) 0%, #dbeafe 100%);
+            border: 1px solid var(--blue-100);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.1);
+        }
+
+        .phase1-summary-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--blue-700);
+            margin-bottom: 16px;
+        }
+
+        .phase1-summary-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--blue-600);
+            max-width: 700px;
+            margin: 0 auto 28px;
+        }
+
+        .highlight-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .highlight-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--blue-200);
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--blue-700);
+            backdrop-filter: blur(8px);
+        }
+
+        .highlight-badge::before {
+            content: "✓";
+            font-weight: 700;
+            color: var(--blue-500);
+        }
     </style>
 </head>
 <body>
@@ -1077,6 +1241,170 @@
 └──────────────────────────────┘</pre>
         </div>
 
+    </div>
+</div>
+
+<!-- PHASE 1 SECTION -->
+<div class="phase1-section">
+    <div class="phase1-container">
+        <!-- Section Header -->
+        <div class="phase1-header">
+            <div class="phase1-badge">
+                <i class="ph ph-rocket"></i>
+                PHASE 1 DELIVERY
+            </div>
+            <h2 class="phase1-title">Core Retail Operations Platform</h2>
+            <p class="phase1-subtitle">
+                Phase 1 focuses on building the operational foundation of the ERP platform covering sales workflows, inventory operations, purchase management, customer handling, and offline-first business processing.
+            </p>
+        </div>
+
+        <!-- Operations Grid -->
+        <div class="operations-grid">
+            <!-- Group 1: Sales Operations -->
+            <div class="operation-card">
+                <div class="operation-icon">
+                    <i class="ph ph-shopping-cart"></i>
+                </div>
+                <h3 class="operation-title">Sales Operations</h3>
+                <ul class="operation-features">
+                    <li>Item Master</li>
+                    <li>Customer Master</li>
+                    <li>Sales Quotations</li>
+                    <li>Sales Orders</li>
+                    <li>Delivery Notes</li>
+                    <li>Sales Invoices</li>
+                    <li>Sales Returns</li>
+                    <li>Credit Notes</li>
+                    <li>Receipts & Payments</li>
+                </ul>
+            </div>
+
+            <!-- Group 2: Inventory Operations -->
+            <div class="operation-card">
+                <div class="operation-icon">
+                    <i class="ph ph-package"></i>
+                </div>
+                <h3 class="operation-title">Inventory Operations</h3>
+                <ul class="operation-features">
+                    <li>Item Categories</li>
+                    <li>Units of Measure</li>
+                    <li>Stock Overview</li>
+                    <li>Warehouse Management</li>
+                    <li>Stock Tracking</li>
+                    <li>Inventory Monitoring</li>
+                </ul>
+            </div>
+
+            <!-- Group 3: Customer Management -->
+            <div class="operation-card">
+                <div class="operation-icon">
+                    <i class="ph ph-users-three"></i>
+                </div>
+                <h3 class="operation-title">Customer Management</h3>
+                <ul class="operation-features">
+                    <li>Customer Categories</li>
+                    <li>Salespersons</li>
+                    <li>Price Lists</li>
+                    <li>Promotions</li>
+                    <li>Customer Ledger</li>
+                    <li>Customer Credit Handling</li>
+                </ul>
+            </div>
+
+            <!-- Group 4: Master Data Management -->
+            <div class="operation-card">
+                <div class="operation-icon">
+                    <i class="ph ph-database"></i>
+                </div>
+                <h3 class="operation-title">Master Data Management</h3>
+                <ul class="operation-features">
+                    <li>Credit Terms</li>
+                    <li>Routes</li>
+                    <li>Areas</li>
+                    <li>Brands</li>
+                    <li>Payment Methods</li>
+                </ul>
+            </div>
+
+            <!-- Group 5: Purchase Operations -->
+            <div class="operation-card">
+                <div class="operation-icon">
+                    <i class="ph ph-truck"></i>
+                </div>
+                <h3 class="operation-title">Purchase Operations</h3>
+                <ul class="operation-features">
+                    <li>Purchase Requests</li>
+                    <li>Purchase Orders</li>
+                    <li>GRN Management</li>
+                    <li>Purchase Billing</li>
+                    <li>Debit Notes</li>
+                    <li>Supplier Handling</li>
+                </ul>
+            </div>
+
+            <!-- Group 6: Purchase Masters -->
+            <div class="operation-card">
+                <div class="operation-icon">
+                    <i class="ph ph-buildings"></i>
+                </div>
+                <h3 class="operation-title">Purchase Masters</h3>
+                <ul class="operation-features">
+                    <li>Suppliers</li>
+                    <li>Purchasers</li>
+                    <li>Supplier Credit Terms</li>
+                    <li>Supplier Ledger</li>
+                    <li>Outstanding Tracking</li>
+                </ul>
+            </div>
+
+            <!-- Group 7: Reporting & Analytics -->
+            <div class="operation-card">
+                <div class="operation-icon">
+                    <i class="ph ph-chart-bar"></i>
+                </div>
+                <h3 class="operation-title">Reporting & Analytics</h3>
+                <ul class="operation-features">
+                    <li>Purchase Reports</li>
+                    <li>Sales Reports</li>
+                    <li>Inventory Reports</li>
+                    <li>Business Monitoring</li>
+                    <li>Dashboard Analytics</li>
+                </ul>
+            </div>
+
+            <!-- Group 8: Platform Foundation -->
+            <div class="operation-card">
+                <div class="operation-icon">
+                    <i class="ph ph-gear-six"></i>
+                </div>
+                <h3 class="operation-title">Platform Foundation</h3>
+                <ul class="operation-features">
+                    <li>Backend Infrastructure</li>
+                    <li>Database Architecture</li>
+                    <li>Role-Based Access</li>
+                    <li>Offline-First Operations</li>
+                    <li>Cloud Synchronization</li>
+                    <li>Final Testing & QA</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Phase 1 Summary -->
+        <div class="phase1-summary">
+            <h3 class="phase1-summary-title">Phase 1 Objective</h3>
+            <p class="phase1-summary-text">
+                To establish a reliable offline-first ERP foundation capable of handling retail sales, inventory operations, purchase workflows, secure cash management, and centralized business monitoring.
+            </p>
+            <div class="highlight-badges">
+                <span class="highlight-badge">Offline-First Operations</span>
+                <span class="highlight-badge">Multi-Counter Billing</span>
+                <span class="highlight-badge">Inventory Control</span>
+                <span class="highlight-badge">Purchase Workflow</span>
+                <span class="highlight-badge">Cloud Synchronization</span>
+                <span class="highlight-badge">Role-Based Security</span>
+            </div>
+        </div>
     </div>
 </div>
 
